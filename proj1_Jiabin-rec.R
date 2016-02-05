@@ -108,6 +108,46 @@ for(i in 1:length(ed.titles)){
   data_clean[,dim(data_clean)[2]][grep(ed.regular[i], data_clean$text_editor)] <- 1
 }
 
+#Add Dummy variables for tools Column
+data_clean$tools <- tolower(as.character(data_clean$tools))
+commas <- strsplit(data_clean$tools, ',')
+
+list.tools <- c()
+for( i in 1:length(data_clean$tools)){
+  list.tools <- c(list.tools, commas[[i]])
+}
+list.tools <- sort(unique(trimws(list.tools)))
+list.tools
+
+tools.regular <- c("c/c","dropbox","excel","ggplot2","github","drive",
+                  "latex","lattice","matlab","python","regula","rstudio",
+                  "shell","spss","sql","stata","sweave/knitr",
+                  "web", "xml")
+
+tools.titles <- c("c/c++","dropbox","excel","ggplot2","github","drive",
+                  "latex","lattice","matlab","python","regular.expressions","rstudio",
+                  "shell","spss","sql","stata","sweave/knitr",
+                  "html.css.jsm", "xml")
+
+for(i in 1:length(tools.titles)){
+  column.name <- paste('tools', tools.titles[i], sep = '.')
+  data_clean <- cbind(data_clean, col = rep(0, nrow(data_clean)))
+  colnames(data_clean)[dim(data_clean)[2]] = column.name
+  data_clean[,dim(data_clean)[2]][grep(tools.regular[i], data_clean$tools)] <- 1
+}
+
+for(i in 1:length(data_clean$tools)){
+  if('r' %in% trimws(commas[[i]])){
+    if(data_clean$tools.rstudio[i] == 1){
+      a_a = 0
+    }
+    else{
+      data_clean$tools.rstudio[i] = 1
+    }
+  }
+}
+
+
 #implementing part of Yanjin's idea, converting confidence level to number
 data_clean[,c(4,7:11)] <- sapply(data_clean[,c(4,7:11)],as.character) 
 data_clean[data_clean == "None"] = 1
