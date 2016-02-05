@@ -92,5 +92,20 @@ pie3D(slices3,labels=lbls3,explode=0.3,radius=1, labelcex=0.7,
       main="Pie Chart of on waitlist by program", col = rainbow(length(slices)),labelcol=rainbow(length(slices)))
 
 
+#Juan
+#Add Dummy Variables for text_editor Column
+data_clean$text_editor <- tolower(data_clean$text_editor)
 
+ed.titles <- c('sublime','ipython','wrangler', 'atom', 'notepad++', 'rstudio', 'webstorm', 
+               'pycharm', 'eclipse', 'jupyter', 'stata', 'python', 'textmate', 'vi.vim', 'xcode')
+
+ed.regular <- c('subl', 'ipy', 'wrang', 'atom', 'notep', 'rstud', 'storm', 'charm', 'eclips', 
+                'jupyt', 'stata', '^pyth','textmate', 'vi', 'xcode')
+
+for(i in 1:length(ed.titles)){
+  column.name <- paste('editor', ed.titles[i], sep = '.')
+  data_clean <- cbind(data_clean, col = rep(0, nrow(data_clean)))
+  colnames(data_clean)[dim(data_clean)[2]] = column.name
+  data_clean[,dim(data_clean)[2]][grep(ed.regular[i], data_clean$text_editor)] <- 1
+}
 
