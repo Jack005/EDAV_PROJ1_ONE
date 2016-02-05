@@ -1,6 +1,6 @@
 library(xlsx)
 library(dplyr)
-library(ggplot2)
+require(ggplot2)
 
 # Load the data
 data <- read.xlsx("Survey+Response.xlsx", sheetName="Form Responses 1")
@@ -21,7 +21,7 @@ FindBlankCols <- function(x) {
 
 
 # We drop all the blank columns
-blank_cols <- FindBlankCols(data)
+blank_cols = FindBlankCols(data)
 data_clean <- data[, ! names(data) %in% blank_cols, drop = F]
 
 # Rename the remaining columns
@@ -36,5 +36,23 @@ data_clean <- data_clean %>%
   rename(RMarkdown = Programming.and.Analytical.Experiences..Reproducible.documentation.with.R..e.g..R.Markdown..) %>%
   rename(Matlab = Programming.and.Analytical.Experiences..Matlab..data.manipulation..analysis..visualization.and.modeling.) %>%  
   rename(Github = Programming.and.Analytical.Experiences..Github.)
+  
 
+# Quick summary plots
+require(scales)
+
+#Repartition of the programs
+ggplot(data_clean, aes(x = as.factor(Program))) +  
+  geom_bar(aes(y = (..count..)/sum(..count..))) + 
+  scale_y_continuous(labels = percent) + 
+  labs(title = "Repartition of the programs", y = "Percent", x = "Program")
+
+
+# Waitlist
+qplot(data_clean$waitlist, main=c('In the waitlist ?')) #With the count
+
+ggplot(data_clean, aes(x = as.factor(waitlist))) +  
+  geom_bar(aes(y = (..count..)/sum(..count..))) + 
+  scale_y_continuous(labels = percent) + 
+  labs(title = "Repartition of the programs", y = "Percent", x = "In the waitlist ?")
   
