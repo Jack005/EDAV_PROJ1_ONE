@@ -55,8 +55,7 @@ ggp = ggplot(data.frame(Programs),aes(x=Programs),main="a")
 # counts
 ggp + geom_bar(fill="lightgreen")
 # proportion
-ggp + geom_bar(fill="lightblue",aes(y=..count../sum(..count..)))
-
+ggp + geom_bar(fill="lightblue",aes(y=..count../sum(..count..))) + ylab("Proportion of Students in each Department")
 
 #pi chart
 # 3D Exploded Pie Chart
