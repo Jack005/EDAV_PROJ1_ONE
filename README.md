@@ -19,10 +19,18 @@ cd EDAV_PROJ1_ONE
 ls
 ```
 
-If you make a new file, put it under the directory EDAV_PROJ1_ONE, if modify an existing file, do the following as well
+If you make a new file, put it under the directory EDAV_PROJ1_ONE
 ```
 git status
 git add "filename"
 git commit -m "adding my file(or any comment, it will appear next to file title.)"
+```
+or if modify an existing file
+```
+git status
+git commit -a "modify(or any comment)"
+```
+Last Step
+```
 git push origin master
 ```
