@@ -234,11 +234,10 @@ weights <- strtoi(weights)
 E(g)$weight = weights
 edgelist <- get.data.frame(g) 
 colnames(edgelist) <- c("source","target","value")
-VAR <- c('r','very weak1', 'weak1', 'medium1', 'strong1')
+VAR <- c('r','None1', 'a little1', 'confident1', 'expert1')
 edgelist$source <- VAR[edgelist$source]
-TARGET <- c('coline','very weak1', 'weak1', 'medium1', 'strong1', 'very weak2', 'weak2', 'medium2', 'strong2')
+TARGET <- c('coline','None1', 'a little1', 'confident1', 'expert1', 'None2', 'a little2', 'confident2', 'expert2')
 edgelist$target <- TARGET[edgelist$target]
-
 
 plot(
   gvisSankey(edgelist, from="source", 
@@ -313,9 +312,9 @@ weights <- strtoi(weights)
 E(g)$weight = weights
 edgelist <- get.data.frame(g) 
 colnames(edgelist) <- c("source","target","value")
-VAR <- c('r','very weak1', 'weak1', 'medium1', 'strong1')
+VAR <- c('r','None1', 'a little1', 'confident1', 'expert1')
 edgelist$source <- VAR[edgelist$source]
-TARGET <- c('coline','very weak1', 'weak1', 'medium1', 'strong1', 'very weak2', 'weak2', 'medium2', 'strong2')
+TARGET <- c('coline','None1', 'a little1', 'confident1', 'expert1', 'None2', 'a little2', 'confident2', 'expert2')
 edgelist$target <- TARGET[edgelist$target]
 
 
