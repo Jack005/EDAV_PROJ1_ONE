@@ -28,6 +28,7 @@ git commit -m "adding my file(or any comment, it will appear next to file title.
 or if modify an existing file
 ```
 git status
+git add "filename"
 git commit -a "modify(or any comment)"
 ```
 Last Step
