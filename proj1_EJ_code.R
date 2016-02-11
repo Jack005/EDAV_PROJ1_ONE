@@ -1,6 +1,6 @@
 library(dplyr)
 library(ggplot2)
-
+#Xizewen Han
 # Load the data
 data <- read.csv("Survey+Response.csv", header = TRUE)
 data = data[,-1]
